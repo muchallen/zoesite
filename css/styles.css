@@ -16,3 +16,10 @@
 li a{
     font-size: medium !important;
 }
+
+.testi-item2{
+border: none;
+margin: 10px;
+border-radius: 10px;
+background: url(../img/bg-dots.png) 0 0 repeat;
+}
