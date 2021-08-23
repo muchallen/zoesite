@@ -2,9 +2,9 @@
 
 (function($){ "use strict";
              
-    $(window).on('load', function() {
-        $('body').addClass('loaded');
-    });
+    // $(window).on('load', function() {
+    //     $('body').addClass('loaded');
+    // });
              
 /*=========================================================================
 	Header
@@ -87,6 +87,7 @@
 	Main Slider
 =========================================================================*/ 
     $(document).ready(function () {
+        $('body').addClass('loaded');
 
         $('#main-slider').on('init', function(e, slick) {
             var $firstAnimatingElements = $('div.single-slide:first-child').find('[data-animation]');
