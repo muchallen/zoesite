@@ -12,6 +12,21 @@ form.addEventListener("submit", function(e){
         width= parseFloat(form.width.value);
         length= parseFloat(form.length.value);
         rooms= parseInt(form.rooms.value);
+
+       
+
+        console.log(length)
+        if(isNaN(rooms)|| isNaN(length)|| isNaN(width) ){
+                alert("Your Inputs are incorrect")
+                return;
+        }
+
+        
+        document.getElementById("calculation_inputs").classList.remove('col-md-12')
+        document.getElementById("calculation_inputs").classList.add('col-md-4')
+        document.getElementById("calculation_content").classList.remove('d-none')
+        
+
         
         // escavation calculation
 
@@ -74,7 +89,7 @@ form.addEventListener("submit", function(e){
         document.getElementById("slab_cement").innerText= parseInt(slab_cement) + " bags"
         document.getElementById("slab_river_sand").innerText= Math.floor(slab_river_sand*100)/100 + " cubic meters"
         document.getElementById("slab_three_quarter_stones").innerText= Math.floor(slab_three_quarter_stones*100)/100 + " cubic meters"
-        document.getElementById("compaction_labour").innerText= " $ " + Math.floor(compaction_labour*100)/100
+        document.getElementById("slab_labour").innerText= " $ " + Math.floor(slab_labour*100)/100
 
         // supper structure
         var s_structure_total_bricks = ((external_wall_length*2)+internal_wall_length)*2.3*60*1.05
@@ -97,8 +112,126 @@ form.addEventListener("submit", function(e){
         document.getElementById("ring_beam_cement").innerText= parseInt(ring_beam_cement) + " bags"
         document.getElementById("ring_beam_river_sand").innerText= Math.floor(ring_beam_river_sand*100)/100 + " cubic meters"
         document.getElementById("ring_beam_three_quarter_stones").innerText= Math.floor(ring_beam_three_quarter_stones*100)/100 + " cubic meters"
-        document.getElementById("s_structure_labour").innerText= " $ " + Math.floor(s_structure_labour*100)/100
+      
 
+
+
+        // total materials 
+
+        var total_cement = footing_cement+box_brickwork_cement+slab_cement+s_structure_cement+ring_beam_cement
+        var total_pitsand = box_brickwork_pitsand+s_structure_pitsand
+        var total_river_sand = footing_river_sand+slab_river_sand+ring_beam_river_sand
+        var total_three_quarter_stone = footing_stones_three_and_quarter + slab_three_quarter_stones + ring_beam_three_quarter_stones
+        var total_gravel = compactions_gravel
+        var total_bricks = box_brickwork_total_bricks + s_structure_total_bricks
+
+        var cement_total_cost = total_cement * 11.5
+        var pitsand_total_cost = total_pitsand * 10
+        var river_sand_total_cost = total_river_sand * 12
+        var three_quarter_stone_total_cost = total_three_quarter_stone * 30
+        var gravel_total_cost = total_gravel * 9
+        var bricks_total_cost = total_bricks *0.15
+        var grand_total = cement_total_cost+pitsand_total_cost+river_sand_total_cost+three_quarter_stone_total_cost
+        +gravel_total_cost+bricks_total_cost
+
+        var total_labour = footing_labour + excavation_labour + footing_labour + box_brickwork_labour + compaction_labour + slab_labour + s_structure_labour
+
+        document.getElementById("cost_body").innerHTML=`
+        <h5>Cost</h5>
+        <table class="table table-striped card">
+        <thead ><tr class="w-100" style="display: flex; width: 100%;">
+                <th class="w-50" >Material </th>
+                <th class="w-50" >Amount $</th>
+        </tr>
+        </thead>
+        <tbody >
+                <tr class="w-100" style="display: flex; width: 100%;">
+                        <td class="w-50">Cement </td>
+                        <td class="w-50" > ${Math.floor(cement_total_cost*100)/100} </td>
+                        </tr>
+                        <tr class="w-100" style="display: flex; width: 100%;">
+                        <td class="w-50">Pitsand </td>
+                        <td class="w-50" > ${Math.floor(pitsand_total_cost*100)/100} </td>
+                        </tr>
+                
+                        <tr class="w-100" style="display: flex; width: 100%;">
+                        <td class="w-50">Riversand </td>
+                        <td class="w-50" > ${Math.floor(river_sand_total_cost*100)/100} </td>
+                        </tr>
+                
+                        <tr class="w-100" style="display: flex; width: 100%;">
+                        <td class="w-50">3/4 Stones </td>
+                        <td class="w-50" > ${Math.floor(three_quarter_stone_total_cost*100)/100} </td>
+                        </tr>
+                
+                        <tr class="w-100" style="display: flex; width: 100%;">
+                        <td class="w-50">Gravel </td>
+                        <td class="w-50" > ${Math.floor(gravel_total_cost*100)/100}</td>
+                        </tr>
+                        <tr class="w-100" style="display: flex; width: 100%;">
+                        <td class="w-50">Bricks </td>
+                        <td class="w-50" > ${Math.floor(bricks_total_cost*100)/100} </td>
+                        </tr>
+                
+        </tbody>
+</table>
+
+        
+        `
+
+        document.getElementById("materials_body").innerHTML=`
+        <h5>Materials</h5>
+        <table class="table table-striped card">
+        <thead ><tr class="w-100" style="display: flex; width: 100%;">
+                <th class="w-50" >Material </th>
+                <th class="w-50" >Quantity</th>
+        </tr>
+        </thead>
+        <tbody >
+                <tr class="w-100" style="display: flex; width: 100%;">
+                        <td class="w-50">Cement </td>
+                        <td class="w-50" > ${parseInt(total_cement)} bags</td>
+                        </tr>
+                        <tr class="w-100" style="display: flex; width: 100%;">
+                        <td class="w-50">Pitsand </td>
+                        <td class="w-50" > ${Math.floor(total_pitsand*100)/100} cubic meters</td>
+                        </tr>
+                
+                        <tr class="w-100" style="display: flex; width: 100%;">
+                        <td class="w-50">Riversand </td>
+                        <td class="w-50" > ${Math.floor(total_river_sand*100)/100} cubic meters</td>
+                        </tr>
+                
+                        <tr class="w-100" style="display: flex; width: 100%;">
+                        <td class="w-50">3/4 Stones </td>
+                        <td class="w-50" > ${Math.floor(total_three_quarter_stone*100)/100} cubic meters</td>
+                        </tr>
+                
+                        <tr class="w-100" style="display: flex; width: 100%;">
+                        <td class="w-50">Gravel </td>
+                        <td class="w-50" > ${Math.floor(total_gravel*100)/100} cubic meters</td>
+                        </tr>
+                        <tr class="w-100" style="display: flex; width: 100%;">
+                        <td class="w-50">Bricks </td>
+                        <td class="w-50" > ${parseInt(total_bricks)} cubic meters</td>
+                        </tr>
+                
+        </tbody>
+</table>
+
+        `
+document.getElementById("grand_total").innerHTML=`
+<h5 class="text-center">Materials Grand Total : $ ${Math.floor(grand_total*100)/100}</h5>
+`
+document.getElementById("labour_total").innerHTML=`
+<h5 class="text-center"> Total Labour: $ ${Math.floor(total_labour*100)/100}</h5>
+`
+document.getElementById("labour35_total").innerHTML=`
+<h5 class="text-center">Labour at 35% : $ ${Math.floor(grand_total*0.35*100)/100}</h5>
+`
+        
+        
+        
         
 })
 
