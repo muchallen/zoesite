@@ -75,7 +75,7 @@
 </div>
 <div class="header-right ml-auto">
         <a type="button" class="menu-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                Cost Culculator
+                Cost Calculator
         </a>
 
 <div class="mobile-menu-icon">
@@ -312,9 +312,8 @@
 <!-- Button trigger modal -->
 
       
-      <!-- Modal -->
-      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog  " id="mode">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="staticBackdropLabel">Cost Calculator</h5>
@@ -323,20 +322,29 @@
             <div class="modal-body">
                 <div class="row">
                         <div class="col-md-12" id="calculation_inputs">
+                          <div class="dimensions-info text-center">
+                            <p><strong class="text-black">Enter your plan dimensions</strong></p>
+                            <p>NB. Length is the longest side on your plan</p>
+                            <p>Include bathrooms and toilets on rooms input</p>
+                            
+                           </div>
                         <div class="row">
+      
                                 <div class="col-md-12 d-flex justify-content-center">
+                                  
                                         <form action="#" id="form1" style="max-width: 500px;" method="post"  >
                                                 <div class="input-group mb-3">
-                                                        <span class="input-group-text" id="basic-addon1">Length</span>
+                                                
+                                                        <span class="input-group-text" id="basic-addon1"  style="width:90px">Length (m)</span>
                                                         <input type="number" step="0.01"  name="length" class="form-control"  id="length"  placeholder="Length" >
                                                        </div>
                                                        <div class="input-group mb-3">
-                                                       <span class="input-group-text" id="basic-addon1">Width</span>
+                                                       <span class="input-group-text" id="basic-addon1"  style="width:90px">Width (m)</span>
                                                        <input type="number" step="0.01" name="width" class="form-control" id="width" value=""  placeholder="Width" >
                                                        </div>
                                                        <div class="input-group mb-3">
-                                                       <span class="input-group-text" id="basic-addon1">Rooms</span>
-                                                       <input type="number" name="rooms" class="form-control" id="rooms"  placeholder="Rooms" >
+                                                       <span class="input-group-text" id="basic-addon1" style="width:90px">Rooms</span>
+                                                       <input type="number" name="rooms" class="form-control" id="rooms"  placeholder="Number Rooms" >
                                                        </div>
                                                       <div class="d-flex justify-content-center"><button type="submit" id="btn-calculation"  class="btn btn-success" >Calculate</button></div> 
                                         </form>
@@ -350,15 +358,15 @@
                                 <div class="col-md-12" id="cost_body">
                                       
                                 </div>
-
+      
                                 <div class="col-md-12 mt-3" id="grand_total">
-
+      
                                 </div>
                                 <div class="col-md-12 mt-3" id="labour_total">
-
+      
                                 </div>
                                 <div class="col-md-12 mt-3" id="labour35_total">
-
+      
                                 </div>
                         </div>
                         </div>
@@ -366,14 +374,14 @@
                                 <div class="row mb-3">
                                         <div class="col-md-6">
                                                 <div class="card p-5 card-height">
-                                                        <p><strong>Escavation</strong></p>
-                                                        <small>escavation volume : <span id="escavation-volume"></span> </small>
-                                                        <small>escavation labour cost :  $ <span id="escavation-labour"></span></small>
+                                                        <p><strong class="text-black">Escavation</strong></p>
+                                                        <small><span style="width:200px">volume :</span> <span id="escavation-volume"></span> cubic meters</small>
+                                                        <small><span style="width:200px">labour:</span> <span id="escavation-labour"></span></small>
                                                 </div>
                                         </div>
                                         <div class="col-md-6">
                                                 <div class="card  p-5 card-height">
-                                                        <p><strong>Footing</strong></p>
+                                                        <p><strong class="text-black">Footing</strong></p>
                                                         <small>Concrete Volume : <span id="footing_concrete_volume"></span> </small>
                                                         <small> Cement :  <span id="footing_cement"></span> </small>
                                                         <small>River Sand :  <span id="footing_river_sand"></span> </small>
@@ -385,7 +393,7 @@
                                 <div class="row mb-3">
                                         <div class="col-md-6">
                                                 <div class="card p-5 card-height">
-                                                        <p><strong>Backfilling & Compaction</strong></p>
+                                                        <p><strong class="text-black">Backfilling & Compaction</strong></p>
                                                         <small>Gravel : <span id="compactions_gravel"></span></small>
                                                         <small>Compactor Hire :<span id="compactorhire"></span></small>
                                                         <small>Labour :<span id="compaction_labour"></span></small>
@@ -393,7 +401,7 @@
                                         </div>
                                         <div class="col-md-6">
                                                 <div class="card p-5 card-height">
-                                                        <p><strong>Box Brickwork </strong></p>
+                                                        <p><strong class="text-black">Box Brickwork </strong></p>
                                                         <small>Total Bricks: <span id="box_brickwork_total_bricks"></span> </small>
                                                         <small>Cement : <span id="box_brickwork_cement"></span> </small>
                                                         <small>Pitsand : <span id="box_brickwork_pitsand"></span></small>
@@ -404,17 +412,17 @@
                                 <div class="row mb-3">
                                         <div class="col-md-6">
                                                 <div class="card p-5 card-height">
-                                                        <p><strong>Slab</strong></p>
+                                                        <p><strong class="text-black">Slab</strong></p>
                                                         <small>Slab Concrete : <span id="slab_concrete"></span></small>
                                                         <small>Cement :<span id="slab_cement"></span> </small>
                                                         <small>River Sand : <span id="slab_river_sand"></span> </small>
                                                         <small>3/4 Stones :<span id="slab_three_quarter_stones"></span> </small>
-                                                        <small>Labour : $<span id="slab_labour"></span></small>
+                                                        <small>Labour : <span id="slab_labour"></span></small>
                                                 </div>
                                         </div>
                                         <div class="col-md-6">
                                                 <div class="card p-5 card-height">
-                                                        <p><strong>Super Structure</strong></p>
+                                                        <p><strong class="text-black">Super Structure</strong></p>
                                                         <small>Total Bricks : <span id="s_structure_total_bricks"></span> </small>
                                                         <small>Cement :<span id="s_structure_cement"> </span> </small>
                                                         <small>Pitsand: <span id="s_structure_pitsand"></span> </small>
@@ -425,7 +433,7 @@
                                 <div class="row mb-3">
                                         <div class="col-md-6">
                                                 <div class="card p-5 card-height">
-                                                        <p><strong>Ring Beam</strong></p>
+                                                        <p><strong class="text-black">Ring Beam</strong></p>
                                                         <small>Concrete : <span id="ring_beam_concrete"></span></small>
                                                         <small>Cement :<span id="ring_beam_cement"></span> </small>
                                                         <small>River Sand : <span id="ring_beam_river_sand"></span> </small>
@@ -434,9 +442,9 @@
                                         </div>
                                         <div class="col-md-6 card-height">
                                                 <div class="card p-5 card-height">
-                                                        <p><strong>Footing</strong></p>
-                                                        <small>Concrete Volume : <span id="footing_concrete_volume"></span> cubic meters</small>
-                                                        <small>Super Structure Labour : $ <span id="footing_labour"></span> </small>
+                                                        <p><strong class="text-black">Ring Beam & Super Structure</strong></p>
+                                                        <small>Labour : <span id="s_structure_labour"></span></small>
+                                                        
                                                 </div>
                                         </div>
                                 </div>
@@ -451,6 +459,7 @@
           </div>
         </div>
       </div>
+
 <div class="text-secondary text-center">Copyright &copy;  2021 all rights reserved, Developed by <a href="https://muchallen.github.io/myportiflio2021/">muchallen</a>
 <script src="js/vendor/jquery-1.12.4.min.js"></script>
 

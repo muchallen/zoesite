@@ -7,6 +7,16 @@ var internal_wall_length
 var excavation_volume 
 var excavation_labour
 
+// Create our number formatter.
+var formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+      
+        // These options are needed to round to whole numbers if that's what you want.
+        //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+        //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+      });
+
 form.addEventListener("submit", function(e){
         e.preventDefault();
         width= parseFloat(form.width.value);
@@ -21,7 +31,17 @@ form.addEventListener("submit", function(e){
                 return;
         }
 
+        if(rooms<1 ){
+                alert("Number of rooms should be greater than 1")
+                return;
+        }
         
+        if(length<2 || width < 2 ){
+                alert("width or height should be greater than 2")
+                return;
+        }
+
+        document.getElementById("mode").classList.add("modal-xl")
         document.getElementById("calculation_inputs").classList.remove('col-md-12')
         document.getElementById("calculation_inputs").classList.add('col-md-4')
         document.getElementById("calculation_content").classList.remove('d-none')
@@ -39,7 +59,7 @@ form.addEventListener("submit", function(e){
         
 
         document.getElementById("escavation-volume").innerText=Math.floor(excavation_volume*100)/100
-        document.getElementById("escavation-labour").innerText=Math.floor(excavation_labour*100)/100
+        document.getElementById("escavation-labour").innerText=formatter.format(Math.floor(excavation_labour*100)/100)
 
         // flooting calculation
         var footing_concrete_volume = (parseFloat(external_wall_length + internal_wall_length)) *0.69*0.23*1.03
@@ -48,7 +68,7 @@ form.addEventListener("submit", function(e){
         var footing_stones_three_and_quarter= footing_concrete_volume * 0.76
         var footing_labour =  footing_concrete_volume *25
 
-        document.getElementById("footing_labour").innerText="$ " + Math.floor(footing_labour*100)/100
+        document.getElementById("footing_labour").innerText=formatter.format(Math.floor(footing_labour*100)/100)
         document.getElementById("footing_concrete_volume").innerText= Math.floor(footing_concrete_volume*100)/100 + " cubic meters"
         document.getElementById("footing_cement").innerText=parseInt(footing_cement) + " bags"
         document.getElementById("footing_river_sand").innerText= Math.floor(footing_river_sand*100)/100 + " cubic meters"
@@ -64,7 +84,7 @@ form.addEventListener("submit", function(e){
         document.getElementById("box_brickwork_total_bricks").innerText= parseInt(box_brickwork_total_bricks) + " bricks"
         document.getElementById("box_brickwork_cement").innerText= parseInt(box_brickwork_cement) + " bags"
         document.getElementById("box_brickwork_pitsand").innerText= Math.floor(box_brickwork_pitsand*100)/100 + " cubic meters"
-        document.getElementById("box_brickwork_labour").innerText= " $ " + Math.floor(box_brickwork_labour*100)/100
+        document.getElementById("box_brickwork_labour").innerText=formatter.format(Math.floor(box_brickwork_labour*100)/100)
         
 //        Backfilling & compactions
         var  compactions_gravel = length*width*0.3
@@ -73,7 +93,7 @@ form.addEventListener("submit", function(e){
 
         document.getElementById("compactions_gravel").innerText= Math.floor(compactions_gravel*100)/100 + " cubic meters"
         document.getElementById("compactorhire").innerText= " $ " + Math.floor(compactorhire*100)/100
-        document.getElementById("compaction_labour").innerText= " $ " + Math.floor(compaction_labour*100)/100
+        document.getElementById("compaction_labour").innerText= formatter.format(Math.floor(compaction_labour*100)/100)
        
 
 
@@ -89,7 +109,7 @@ form.addEventListener("submit", function(e){
         document.getElementById("slab_cement").innerText= parseInt(slab_cement) + " bags"
         document.getElementById("slab_river_sand").innerText= Math.floor(slab_river_sand*100)/100 + " cubic meters"
         document.getElementById("slab_three_quarter_stones").innerText= Math.floor(slab_three_quarter_stones*100)/100 + " cubic meters"
-        document.getElementById("slab_labour").innerText= " $ " + Math.floor(slab_labour*100)/100
+        document.getElementById("slab_labour").innerText=formatter.format(Math.floor(slab_labour*100)/100)
 
         // supper structure
         var s_structure_total_bricks = ((external_wall_length*2)+internal_wall_length)*2.3*60*1.05
@@ -112,6 +132,7 @@ form.addEventListener("submit", function(e){
         document.getElementById("ring_beam_cement").innerText= parseInt(ring_beam_cement) + " bags"
         document.getElementById("ring_beam_river_sand").innerText= Math.floor(ring_beam_river_sand*100)/100 + " cubic meters"
         document.getElementById("ring_beam_three_quarter_stones").innerText= Math.floor(ring_beam_three_quarter_stones*100)/100 + " cubic meters"
+        document.getElementById("s_structure_labour").innerText= formatter.format( Math.floor(s_structure_labour*100)/100 )
       
 
 
@@ -147,30 +168,30 @@ form.addEventListener("submit", function(e){
         <tbody >
                 <tr class="w-100" style="display: flex; width: 100%;">
                         <td class="w-50">Cement </td>
-                        <td class="w-50" > ${Math.floor(cement_total_cost*100)/100} </td>
+                        <td class="w-50" > ${formatter.format( Math.floor(cement_total_cost*100)/100)} </td>
                         </tr>
                         <tr class="w-100" style="display: flex; width: 100%;">
                         <td class="w-50">Pitsand </td>
-                        <td class="w-50" > ${Math.floor(pitsand_total_cost*100)/100} </td>
+                        <td class="w-50" > ${formatter.format(Math.floor(pitsand_total_cost*100)/100)} </td>
                         </tr>
                 
                         <tr class="w-100" style="display: flex; width: 100%;">
                         <td class="w-50">Riversand </td>
-                        <td class="w-50" > ${Math.floor(river_sand_total_cost*100)/100} </td>
+                        <td class="w-50" > ${formatter.format(Math.floor(river_sand_total_cost*100)/100)} </td>
                         </tr>
                 
                         <tr class="w-100" style="display: flex; width: 100%;">
                         <td class="w-50">3/4 Stones </td>
-                        <td class="w-50" > ${Math.floor(three_quarter_stone_total_cost*100)/100} </td>
+                        <td class="w-50" > ${formatter.format(Math.floor(three_quarter_stone_total_cost*100)/100)} </td>
                         </tr>
                 
                         <tr class="w-100" style="display: flex; width: 100%;">
                         <td class="w-50">Gravel </td>
-                        <td class="w-50" > ${Math.floor(gravel_total_cost*100)/100}</td>
+                        <td class="w-50" > ${formatter.format(Math.floor(gravel_total_cost*100)/100)}</td>
                         </tr>
                         <tr class="w-100" style="display: flex; width: 100%;">
                         <td class="w-50">Bricks </td>
-                        <td class="w-50" > ${Math.floor(bricks_total_cost*100)/100} </td>
+                        <td class="w-50" > ${formatter.format(Math.floor(bricks_total_cost*100)/100)} </td>
                         </tr>
                 
         </tbody>
@@ -213,7 +234,7 @@ form.addEventListener("submit", function(e){
                         </tr>
                         <tr class="w-100" style="display: flex; width: 100%;">
                         <td class="w-50">Bricks </td>
-                        <td class="w-50" > ${parseInt(total_bricks)} cubic meters</td>
+                        <td class="w-50" > ${parseInt(total_bricks)} </td>
                         </tr>
                 
         </tbody>
@@ -221,14 +242,12 @@ form.addEventListener("submit", function(e){
 
         `
 document.getElementById("grand_total").innerHTML=`
-<h5 class="text-center">Materials Grand Total : $ ${Math.floor(grand_total*100)/100}</h5>
+<h5 class="text-center">Materials Grand Total : ${formatter.format(Math.floor(grand_total*100)/100)}</h5>
 `
 document.getElementById("labour_total").innerHTML=`
-<h5 class="text-center"> Total Labour: $ ${Math.floor(total_labour*100)/100}</h5>
+<h5 class="text-center"> Total Labour: ${formatter.format(Math.floor(total_labour*100)/100)}</h5>
 `
-document.getElementById("labour35_total").innerHTML=`
-<h5 class="text-center">Labour at 35% : $ ${Math.floor(grand_total*0.35*100)/100}</h5>
-`
+
         
         
         
