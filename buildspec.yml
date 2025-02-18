@@ -1,0 +1,18 @@
+version: 0.w
+phase:
+  install:
+      runtime-version:
+          node: latest
+      commands:
+          - echo "installing something"
+  pre_build:
+      commands:
+          - echo "we are in the build phase"
+  build:
+      commands: 
+          - echo "we are in the build block"
+          - echo "we will run some tests" 
+          - grep -Fq "Congradulations" index.html
+  post_build:
+      commands:
+          - echo "we are in post build phase"
